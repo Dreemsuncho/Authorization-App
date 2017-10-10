@@ -17,6 +17,9 @@ namespace AuthorizationLab.Controllers
             const string issuer = "https://contoso.com";
             var claims = new List<Claim>();
             claims.Add(new Claim(ClaimTypes.Name, "Elvis", ClaimValueTypes.String, issuer));
+            claims.Add(new Claim(ClaimTypes.Role, "Administrator", ClaimValueTypes.String, issuer));
+
+
             var userIdentity = new ClaimsIdentity("SuperSecureLogin");
             userIdentity.AddClaims(claims);
             var userPrincipal = new ClaimsPrincipal(userIdentity);

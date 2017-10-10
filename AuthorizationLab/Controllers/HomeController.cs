@@ -3,6 +3,7 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace AuthorizationLab.Controllers
 {
+    [Authorize(Roles ="Administrator")]
     public class HomeController : Controller
     {
         public ActionResult Index()
