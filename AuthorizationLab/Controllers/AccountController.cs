@@ -19,7 +19,8 @@ namespace AuthorizationLab.Controllers
             {
                 new Claim(ClaimTypes.Name, "Elvis", ClaimValueTypes.String, issuer),
                 new Claim(ClaimTypes.Role, "Administrator", ClaimValueTypes.String, issuer),
-                new Claim("EmployeeId", "123", ClaimValueTypes.String, issuer)
+                new Claim("EmployeeId", "123", ClaimValueTypes.String, issuer),
+                new Claim(ClaimTypes.DateOfBirth, "1970-06-08", ClaimValueTypes.Date)
             };
 
             var userIdentity = new ClaimsIdentity("SuperSecureLogin");

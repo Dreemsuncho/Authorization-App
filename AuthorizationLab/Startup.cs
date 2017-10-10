@@ -9,6 +9,7 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc.Authorization;
+using AuthorizationLab.AuthorizationHandlers;
 
 namespace AuthorizationLab
 {
@@ -27,6 +28,7 @@ namespace AuthorizationLab
             {
                 config.AddPolicy("AdministratorOnly", policy => policy.RequireRole("Administrator"));
                 config.AddPolicy("EmployeeId", policy => policy.RequireClaim("EmployeeId", "123", "321"));
+                config.AddPolicy("Over21Only", policy => policy.Requirements.Add(new MinimumAgeRequirement(21)));
             });
 
             services.AddMvc(config =>
@@ -36,6 +38,8 @@ namespace AuthorizationLab
                                  .Build();
                 config.Filters.Add(new AuthorizeFilter(policy));
             });
+
+            services.AddScoped<IAuthorizationHandler, MinimumAgeHandler>();
         }
 
         public void Configure(IApplicationBuilder app, IHostingEnvironment env)
