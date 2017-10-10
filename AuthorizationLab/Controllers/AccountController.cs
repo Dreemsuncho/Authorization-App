@@ -15,10 +15,12 @@ namespace AuthorizationLab.Controllers
         public async Task<ActionResult> Login(string returnUrl = null)
         {
             const string issuer = "https://contoso.com";
-            var claims = new List<Claim>();
-            claims.Add(new Claim(ClaimTypes.Name, "Elvis", ClaimValueTypes.String, issuer));
-            claims.Add(new Claim(ClaimTypes.Role, "Administrator", ClaimValueTypes.String, issuer));
-
+            var claims = new List<Claim>
+            {
+                new Claim(ClaimTypes.Name, "Elvis", ClaimValueTypes.String, issuer),
+                new Claim(ClaimTypes.Role, "Administrator", ClaimValueTypes.String, issuer),
+                new Claim("EmployeeId", "123", ClaimValueTypes.String, issuer)
+            };
 
             var userIdentity = new ClaimsIdentity("SuperSecureLogin");
             userIdentity.AddClaims(claims);

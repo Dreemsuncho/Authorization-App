@@ -17,11 +17,17 @@ namespace AuthorizationLab
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddAuthentication(CookieAuthenticationDefaults.AuthenticationScheme)
-                .AddCookie(CookieAuthenticationDefaults.AuthenticationScheme, options =>
+                .AddCookie(CookieAuthenticationDefaults.AuthenticationScheme, config =>
                 {
-                    options.LoginPath = new PathString("/Account/Login");
-                    options.AccessDeniedPath = new PathString("/Account/Forbidden");
+                    config.LoginPath = new PathString("/Account/Login");
+                    config.AccessDeniedPath = new PathString("/Account/Forbidden");
                 });
+
+            services.AddAuthorization(config =>
+            {
+                config.AddPolicy("AdministratorOnly", policy => policy.RequireRole("Administrator"));
+                config.AddPolicy("EmployeeId", policy => policy.RequireClaim("EmployeeId", "123", "321"));
+            });
 
             services.AddMvc(config =>
             {

@@ -3,7 +3,7 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace AuthorizationLab.Controllers
 {
-    [Authorize(Roles ="Administrator")]
+    [Authorize(Policy = "EmployeeId")]
     public class HomeController : Controller
     {
         public ActionResult Index()
