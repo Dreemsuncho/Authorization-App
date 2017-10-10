@@ -3,7 +3,7 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace AuthorizationLab.Controllers
 {
-    [Authorize(Policy = "Over21Only")]
+    [Authorize(Policy = "BuildingEntry")]
     public class HomeController : Controller
     {
         public ActionResult Index()

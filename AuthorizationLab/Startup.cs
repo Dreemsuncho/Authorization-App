@@ -29,6 +29,7 @@ namespace AuthorizationLab
                 config.AddPolicy("AdministratorOnly", policy => policy.RequireRole("Administrator"));
                 config.AddPolicy("EmployeeId", policy => policy.RequireClaim("EmployeeId", "123", "321"));
                 config.AddPolicy("Over21Only", policy => policy.Requirements.Add(new MinimumAgeRequirement(21)));
+                config.AddPolicy("BuildingEntry", policy => policy.Requirements.Add(new OfficeEntryRequirement()));
             });
 
             services.AddMvc(config =>
@@ -40,6 +41,8 @@ namespace AuthorizationLab
             });
 
             services.AddScoped<IAuthorizationHandler, MinimumAgeHandler>();
+            services.AddScoped<IAuthorizationHandler, HasBadgeHandler>();
+            services.AddScoped<IAuthorizationHandler, HasTemporaryPassHandler>();
         }
 
         public void Configure(IApplicationBuilder app, IHostingEnvironment env)
