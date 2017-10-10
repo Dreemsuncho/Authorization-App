@@ -8,6 +8,8 @@ namespace AuthorizationLab.AuthorizationHandlers
 {
     public class OfficeEntryRequirement : IAuthorizationRequirement { }
 
+    public class EditDocumentRequirement: IAuthorizationRequirement { }
+     
     public class MinimumAgeRequirement : IAuthorizationRequirement
     {
         internal int _minAge;

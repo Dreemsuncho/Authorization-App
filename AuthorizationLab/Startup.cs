@@ -10,6 +10,7 @@ using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc.Authorization;
 using AuthorizationLab.AuthorizationHandlers;
+using AuthorizationLab.Repositories;
 
 namespace AuthorizationLab
 {
@@ -43,6 +44,9 @@ namespace AuthorizationLab
             services.AddScoped<IAuthorizationHandler, MinimumAgeHandler>();
             services.AddScoped<IAuthorizationHandler, HasBadgeHandler>();
             services.AddScoped<IAuthorizationHandler, HasTemporaryPassHandler>();
+            services.AddScoped<IAuthorizationHandler, EditDocumentHandler>();
+
+            services.AddSingleton<IDocumentRepository, DocumentRepository>();
         }
 
         public void Configure(IApplicationBuilder app, IHostingEnvironment env)

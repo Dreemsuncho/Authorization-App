@@ -6,6 +6,7 @@
 
   <ItemGroup>
     <Folder Include="Views\Home\" />
+    <Folder Include="Views\Document\" />
     <Folder Include="wwwroot\" />
   </ItemGroup>
 
